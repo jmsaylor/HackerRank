@@ -11,26 +11,33 @@
 
 function luckBalance(k, contests) {
   let luckBalance = 0;
-  const arr = [];
+  let arr = [];
+
+  console.log(contests);
 
   //add unimportant games to balance or separate important to new array
   contests.forEach((contest) => {
-    contest[1] === 0 ? (luckBalance += contest[0]) : arr.push(contest[0]);
+    if (contest[1] === 0) {
+      luckBalance += contest[0];
+    } else {
+      arr.push(contest[0]);
+    }
   });
 
-  //sort the array
-  arr.sort((a, b) => a - b);
+  console.log(luckBalance);
 
-  //lose top k
-  for (let x = 0; x < k; x++) {
-    const value = arr.pop();
-    luckBalance += value;
-  }
+  arr = arr.sort((a, b) => b - a);
 
-  //we are forced to win the rest of the games
-  const sum = arr.reduce((a, b) => a + b);
-  luckBalance -= sum;
-  //win the rest
+  console.log(arr);
+
+  arr.forEach((element, index) => {
+    // console.log(element, index);
+    if (index < k) {
+      luckBalance += element;
+    } else {
+      luckBalance -= element;
+    }
+  });
   console.log(luckBalance);
   return luckBalance;
 }
@@ -40,4 +47,13 @@ luckBalance(1, [
   [6, 0],
   [5, 1],
   [2, 1],
+]);
+
+luckBalance(3, [
+  [5, 1],
+  [2, 1],
+  [1, 1],
+  [8, 1],
+  [10, 0],
+  [5, 0],
 ]);
