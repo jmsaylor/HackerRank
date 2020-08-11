@@ -21,5 +21,39 @@ function twoStrings(s1, s2) {
   return "NO";
 }
 
-console.log(twoStrings("xyz", "abc"));
-console.log(twoStrings("food", "world"));
+// console.log(twoStrings("xyz", "abc"));
+// console.log(twoStrings("food", "world"));
+
+function twoStrings2(str1, str2) {
+  set1 = new Set(str1);
+  set2 = new Set(str2);
+
+  set1 = [...set1];
+
+  for (let x = 0; x < set1.length; x++) {
+    if (set2.has(set1[x])) {
+      return "YES";
+    }
+  }
+  return "NO";
+}
+
+// console.log(twoStrings2("dog", "doggie"));
+// console.log(twoStrings2("abc", "xyz"));
+
+function test() {
+  console.time("Set: ");
+  twoStrings2(
+    "xvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvb",
+    "tytytytytytytytytytytytytytytytytytytytytyb"
+  );
+  console.timeEnd("Set: ");
+  console.time("String: ");
+  twoStrings(
+    "xvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvxvb",
+    "tytytytytytytytytytytytytytytytytytytytytyb"
+  );
+  console.timeEnd("String: ");
+}
+
+test();
