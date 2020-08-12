@@ -22,4 +22,23 @@ function countingValleys(n, s) {
   return valleyCount;
 }
 
-console.log(countingValleys(null, "UUDDDUUUDDDDUUUUDDDDDUUUUUUUUUUUDDDDD"));
+function countingValleys2(n, s) {
+  const hike = s.split("").reduce(
+    (acc, next, index) => {
+      next === "U" ? acc.currentAltitude++ : acc.currentAltitude--;
+      acc.log.push(acc.currentAltitude);
+      if (acc.currentAltitude === 0 && acc.log[index - 1] < 0) {
+        acc.valleyCount++;
+      }
+      return { ...acc };
+    },
+    {
+      log: [],
+      currentAltitude: 0,
+      valleyCount: 0,
+    }
+  );
+  return hike.valleyCount;
+}
+
+console.log(countingValleys2(null, "UUDDDUUUDDDDUUDDDUUUUDDD"));
