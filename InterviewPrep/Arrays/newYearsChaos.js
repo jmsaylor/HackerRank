@@ -1,21 +1,5 @@
-const fetch = require("node-fetch");
-const fs = require("fs");
 //epic: find the minimum number of bribes that have occured
 
-let array = [];
-
-const getData = () => {
-  fs.readFile("./input09.txt", "utf-8", (err, data) => {
-    if (err) throw err;
-
-    return data;
-  });
-};
-
-console.time("read jumbo");
-const data = getData();
-console.log(data);
-console.timeEnd("read jumbo");
 //array elements will have the value of that person's original spot
 //1 bribe equals one shift to the left
 //max 2 bribes

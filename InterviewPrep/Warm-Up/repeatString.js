@@ -1,0 +1,1 @@
+function repeatedString(s, n) {}
