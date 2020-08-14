@@ -9,7 +9,7 @@ function jumpingOnClouds(c) {
       minJumps++;
     } else {
       return minJumps;
-      console.log(minJumps);
+      //   console.log(minJumps);
     }
   }
 }
