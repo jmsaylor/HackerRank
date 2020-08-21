@@ -3,31 +3,56 @@
 //find max of mins
 
 const riddle = (arr) => {
-  const n = arr.length;
-  console.log(n);
-  let windows = {};
-
-  for (let x = 0; x < arr.length; x++) {
-    windows[x + 1] = [];
-  }
-
-  console.log(windows);
+  let windows = [];
 
   for (let i = 0; i < arr.length; i++) {
     console.log("index: ", i);
-    for (let windowSize = 1; windowSize <= arr.length; windowSize++) {
-      if (i + windowSize <= arr.length) {
-        const windo = Math.min(...arr.slice(i, i + windowSize));
-        windows[windowSize].push(windo);
-      }
+    for (let windowSize = arr.length - i; windowSize >= 1; windowSize--) {
+      if (windowSize === 1) continue;
+      if (i === 0) windows[windowSize] = [];
+      console.log(windowSize);
+      windows[windowSize].push(Math.min(...arr.slice(i, i + windowSize)));
+    }
+    if (windows[windows.length - (i + 1)]) {
+      windows[windows.length - (i + 1)] = Math.max(
+        ...windows[windows.length - (i + 1)]
+      );
     }
   }
-  console.log(windows);
-  const maxNums = Object.keys(windows).map((win) => {
-    return Math.max(...windows[win]);
-  });
 
-  return maxNums;
+  windows.shift();
+  windows[0] = Math.max(...arr);
+  return windows;
 };
 
-console.log(riddle([1, 7, 3, 13, 5]));
+const riddle2 = (arr) => {
+  let windows = [];
+  let max = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    max = arr[i] > max ? arr[i] : max;
+    for (let windowSize = arr.length - i; windowSize >= 1; windowSize--) {
+      if (windowSize === 1) continue;
+      if (i === 0) windows[windowSize] = [];
+      // console.log(windowSize);
+      windows[windowSize].push(Math.min(...arr.slice(i, i + windowSize)));
+    }
+    if (windows[windows.length - (i + 1)]) {
+      windows[windows.length - (i + 1)] = Math.max(
+        ...windows[windows.length - (i + 1)]
+      );
+    }
+  }
+
+  windows.shift();
+  windows[0] = max;
+  return windows;
+};
+
+console.time("with");
+riddle([1, 7, 3, 13, 5]);
+console.timeEnd("with");
+
+console.time("without");
+riddle2([1, 7, 3, 13, 5]);
+console.timeEnd("without");
