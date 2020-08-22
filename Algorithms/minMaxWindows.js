@@ -56,3 +56,11 @@ console.timeEnd("with");
 console.time("without");
 riddle2([1, 7, 3, 13, 5]);
 console.timeEnd("without");
+
+const riddle_reduce = (arr) => {
+  windows = arr.reduce((acc, next, index) => {
+    
+  },{
+
+  })
+}
